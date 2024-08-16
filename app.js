@@ -2,7 +2,9 @@ const mongoose = require('mongoose');
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
-const taskRoute =  require('./src/routes/taskRoute');
+const taskRoute =  require('./routes/taskRoute');
+const cors = require('cors');
+app.use(cors()); 
 
 require('dotenv').config();
 
@@ -31,9 +33,9 @@ mongoose.connection.on('error', (err) => {
 
 // Use task routes and Start the server
 // Give a starting point to the API.
-app.use('/', taskRoute);
+app.use('/api', taskRoute);
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 4000;
 app.listen(port, () => {
     console.log(`Server running on port ${port}`);
 });
